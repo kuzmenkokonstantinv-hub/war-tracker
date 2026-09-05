@@ -1,0 +1,1172 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Хто зламається пізніше</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+
+<style>
+  :root {
+    --paper:      #E8E9E4;
+    --surface:    #F4F5F1;
+    --surface-2:  #DEE0D9;
+    --ink:        #1A1F1C;
+    --muted:      #626B64;
+    --faint:      #8A9289;
+    --rule:       #C7CAC1;
+    --rule-soft:  #D8DAD2;
+    --ru:         #A8452B;
+    --ru-wash:    #A8452B1F;
+    --ua:         #16697A;
+    --ua-wash:    #16697A1F;
+    --flat:       #7A8279;
+    --flat-wash:  #7A827918;
+
+    --f-display: "Bitter", Georgia, "Times New Roman", serif;
+    --f-body:    "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    --f-mono:    "JetBrains Mono", "Consolas", ui-monospace, monospace;
+
+    --measure: 66ch;
+    --max: 1140px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #131511;
+      --surface:    #1B1E19;
+      --surface-2:  #23271F;
+      --ink:        #E9EBE3;
+      --muted:      #9BA394;
+      --faint:      #78806F;
+      --rule:       #313629;
+      --rule-soft:  #262A20;
+      --ru:         #E37D58;
+      --ru-wash:    #E37D5826;
+      --ua:         #55BACD;
+      --ua-wash:    #55BACD26;
+      --flat:       #8B9382;
+      --flat-wash:  #8B93821F;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #131511;
+    --surface:    #1B1E19;
+    --surface-2:  #23271F;
+    --ink:        #E9EBE3;
+    --muted:      #9BA394;
+    --faint:      #78806F;
+    --rule:       #313629;
+    --rule-soft:  #262A20;
+    --ru:         #E37D58;
+    --ru-wash:    #E37D5826;
+    --ua:         #55BACD;
+    --ua-wash:    #55BACD26;
+    --flat:       #8B9382;
+    --flat-wash:  #8B93821F;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.25rem;
+  }
+
+  /* ---------- shared type ---------- */
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: clamp(2.3rem, 6vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0.5rem 0 0;
+  }
+
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  h3 {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: var(--measure); }
+
+  a { color: inherit; text-decoration-color: var(--faint); text-underline-offset: 2px; }
+  a:hover { text-decoration-color: currentColor; }
+  a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
+
+  .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+  section { display: flex; flex-direction: column; gap: 1.15rem; }
+
+  /* ---------- header ---------- */
+
+  .masthead { display: flex; flex-direction: column; gap: 1.15rem; }
+
+  .lede {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 58ch;
+  }
+
+  .stamp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--ink);
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .stamp b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- forecast ---------- */
+
+  .bar {
+    display: flex;
+    height: 3.25rem;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .bar span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--paper);
+  }
+  .bar .s-ru   { background: var(--ru); }
+  .bar .s-both { background: var(--flat); }
+  .bar .s-ua   { background: var(--ua); }
+  .bar .s-long { background: var(--surface-2); color: var(--muted); }
+
+  .scenarios { display: flex; flex-direction: column; gap: 0; }
+
+  .scn {
+    display: grid;
+    grid-template-columns: 0.5rem 1fr auto auto;
+    align-items: baseline;
+    gap: 0 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .scn:last-child { border-bottom: none; }
+  .swatch { width: 0.5rem; height: 0.5rem; border-radius: 50%; align-self: center; }
+  .scn-name { font-weight: 600; }
+  .scn-horizon {
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .scn-val {
+    font-family: var(--f-mono);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    font-size: 1.05rem;
+    min-width: 6.5rem;
+    text-align: right;
+  }
+  .delta { font-size: 0.78rem; font-weight: 400; }
+  .scn-note { font-size: 0.82rem; color: var(--muted); }
+  .scn-note b { font-family: var(--f-mono); color: var(--ink); font-weight: 600; }
+  .up   { color: var(--ru); }
+  .down { color: var(--ua); }
+  .same { color: var(--faint); }
+
+  /* ---------- change log ---------- */
+
+  .changes { display: flex; flex-direction: column; gap: 0.9rem; }
+  .change {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 0 1.25rem;
+    padding-left: 0.9rem;
+    border-left: 3px solid var(--rule);
+  }
+  .change.ru { border-left-color: var(--ru); }
+  .change.ua { border-left-color: var(--ua); }
+  .change dt {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.25rem;
+  }
+  .change dd { margin: 0; max-width: 60ch; }
+  .change dd b { font-weight: 600; }
+
+  /* ---------- watchlist ---------- */
+
+  .watch { display: flex; flex-direction: column; gap: 0; }
+  .wrow {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 0 1.25rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .wrow:last-child { border-bottom: none; }
+  .wdate {
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .wbody { max-width: 62ch; }
+  .wthresh {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.87rem;
+    color: var(--muted);
+  }
+  .wthresh b { font-family: var(--f-mono); font-weight: 600; color: var(--ink); }
+
+  /* ---------- indicators ---------- */
+
+  .group { display: flex; flex-direction: column; gap: 0; }
+  .group-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .group-head::after { content: ""; flex: 1; }
+
+  .ind {
+    display: grid;
+    grid-template-columns: 3px 1fr minmax(9rem, auto) 5.5rem;
+    align-items: baseline;
+    gap: 0 1.1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .ind:last-child { border-bottom: none; }
+  .stripe { grid-row: 1; align-self: stretch; background: var(--flat); border-radius: 2px; }
+  .ind.ru .stripe { background: var(--ru); }
+  .ind.ua .stripe { background: var(--ua); }
+  .ind-label { font-size: 0.97rem; }
+  .ind-note { display: block; color: var(--muted); font-size: 0.85rem; }
+  .ind-val {
+    font-family: var(--f-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-align: right;
+  }
+  .ind-val small { display: block; font-weight: 400; font-size: 0.76rem; color: var(--muted); }
+  .ind-when {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    color: var(--faint);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .legend i { width: 1.15rem; height: 3px; border-radius: 2px; display: inline-block; }
+
+  /* ---------- systemic callout ---------- */
+
+  .flag {
+    background: var(--ru-wash);
+    border-left: 3px solid var(--ru);
+    border-radius: 0 3px 3px 0;
+    padding: 1.15rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .flag h3 { color: var(--ru); }
+  .flag p { max-width: 64ch; }
+
+  /* ---------- history table ---------- */
+
+  .scroll { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 34rem;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: right;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--rule-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  th:first-child, td:first-child { text-align: left; padding-left: 0; font-variant-numeric: normal; }
+  td:last-child, th:last-child { padding-right: 0; }
+  thead th {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+  }
+  tbody td:not(:first-child) { font-family: var(--f-mono); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--ink);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  footer h3 { color: var(--ink); }
+  footer p { max-width: 68ch; }
+  footer b { color: var(--ink); font-weight: 600; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; font-size: 0.85rem; }
+
+  /* ---------- trend chart ---------- */
+
+  #trend-chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 40rem;
+  }
+  #trend-chart text {
+    font-family: var(--f-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .legend b { font-family: var(--f-mono); color: var(--ink); font-weight: 600; }
+
+  .chart-scroll { position: relative; }
+
+  .chart-tip {
+    position: absolute;
+    top: 0.25rem;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 2;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.5rem 0.7rem;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: var(--ink);
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+  }
+  .chart-tip[hidden] { display: none; }
+  .chart-tip .tip-date {
+    display: block;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .chart-tip i {
+    display: inline-block;
+    width: 0.8rem;
+    height: 3px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 0.4rem;
+  }
+  .chart-tip b { font-weight: 600; }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 2.25rem 1.15rem 3.5rem; gap: 2.5rem; }
+    .change, .wrow { grid-template-columns: 1fr; gap: 0.3rem; }
+    .ind { grid-template-columns: 3px 1fr auto; }
+    .ind-when { display: none; }
+    .scn { grid-template-columns: 0.5rem 1fr auto; }
+    .scn-horizon { grid-column: 2 / -1; }
+    .bar span { font-size: 0.72rem; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Трекер · оновлено 5 вересня 2026, 08:15</p>
+    <h1>Хто зламається пізніше</h1>
+    <p class="lede">Війна РФ&nbsp;— Україна більше не вирішується на лінії фронту. Вона вирішується тим, чия тилова система здасться першою: російські банки й нафтопереробка чи українські кадри й енергетика. Це дошка спостереження за обома.</p>
+    <div class="stamp">
+      <span>Оновлень: <b>15</b></span>
+      <span>Попереднє: <b>04.09.2026, 08:20</b></span>
+      <span>Наступна дата-тригер: <b>18–20.09.2026</b></span>
+    </div>
+  </header>
+
+  <section id="forecast">
+    <h2>Прогноз</h2>
+    <p>«Злам»&nbsp;— момент, коли сторона змушена прийняти умови, які зараз відкидає. Не колапс, не капітуляція: примус до угоди.</p>
+
+    <div class="bar" role="img" aria-label="Розподіл ймовірностей: Росія поступається першою 36 відсотків, взаємне виснаження 33, Україна поступається першою 26, затяжна війна 5">
+      <span class="s-ru"   style="width:36%">36%</span>
+      <span class="s-both" style="width:33%">33%</span>
+      <span class="s-ua"   style="width:26%">26%</span>
+      <span class="s-long" style="width:5%">5%</span>
+    </div>
+
+    <div class="scenarios">
+      <div class="scn">
+        <i class="swatch" style="background:var(--ru)"></i>
+        <span class="scn-name">Росія поступається першою</span>
+        <span class="scn-horizon">Q4 2026 – Q3 2027</span>
+        <span class="scn-val">36% <span class="delta down">▼ −3</span></span>
+      </div>
+      <div class="scn">
+        <i class="swatch" style="background:var(--flat)"></i>
+        <span class="scn-name">Обидві виснажені → заморозка під тиском США</span>
+        <span class="scn-horizon">2027</span>
+        <span class="scn-val">33% <span class="delta up">▲ +3</span></span>
+      </div>
+      <div class="scn">
+        <i class="swatch" style="background:var(--ua)"></i>
+        <span class="scn-name">Україна поступається першою</span>
+        <span class="scn-horizon">зима 2026/27 – Q4 2027</span>
+        <span class="scn-val">26% <span class="delta same">— 0</span></span>
+      </div>
+      <div class="scn">
+        <i class="swatch" style="background:var(--surface-2)"></i>
+        <span class="scn-name">Затяжна війна далі 2028</span>
+        <span class="scn-horizon">—</span>
+        <span class="scn-val">5% <span class="delta same">— 0</span></span>
+      </div>
+    </div>
+    <p class="scn-note">Дельти показують зсув <b>5 вересня</b> проти попередньої оцінки від 3 вересня.</p>
+  </section>
+
+  <section id="changes">
+    <h2>Що змінилось з 4 вересня</h2>
+    <dl class="changes">
+      <div class="change">
+        <dt>Поріг пройдено: Віткофф і Кушнер їдуть до Путіна 5 вересня</dt>
+        <dd>Мій поріг звучав так: «другий візит або оголошена зустріч на рівні Віткофф–Ушаков до 30.09 = канал живий». Він <b>пройдений і з запасом</b>: 04.09 оголошено, що спецпредставники Трампа <b>Віткофф і Кушнер у суботу 05.09 зустрічаються з Путіним у Кремлі</b> (з російського боку&nbsp;— Ушаков), а в неділю 06.09 їдуть до Києва до Зеленського. Це <b>десять днів після візиту Ратклиффа</b>, тобто саме та повторюваність, якої я чекав. Що це не означає: угоди. Bloomberg 04.09&nbsp;— очікування <b>«вкрай низькі»</b>, джерела біля Кремля кажуть, що попередні поїздки Віткоффа нічого не дали, а вимоги Москви <b>жорсткішають</b>, бо Путін вважає, що має воєнну перевагу. Я підвищую сценарій заморозки саме тому, що канал працює регулярно, а не тому, що ця конкретна поїздка дасть результат.</dd>
+      </div>
+      <div class="change">
+        <dt>Другий поріг: серпневий відтік готівки в РФ сповільнився на третину</dt>
+        <dd>Цифра, на яку я чекав з початку вересня, вийшла й вийшла <b>не на мій бік</b>. Приріст готівки в обігу за серпень&nbsp;— <b>434 млрд ₽</b> (ЦБ через «Интерфакс»; частина джерел дає 443 млрд) проти <b>618,4 млрд ₽ у липні</b>: мінус приблизно третина. Фіндиректор Сбербанку Тарас Скворцов прямо говорить про поліпшення. Мій поріг «більше $7,3 млрд = некерована фаза набігу» <b>не пройдено</b>, і рух пішов у протилежний бік. Дві застороги. Перша&nbsp;— це різні метрики: 643 млрд ₽ за липень у моїх індикаторах&nbsp;— це зняття коштів, а 618,4 і 434&nbsp;— приріст готівки в обігу; порівнювати можна лише другий ряд із другим. Друга&nbsp;— рівень усе одно величезний: з початку року +2,5 трлн ₽, ЦБ планує +3,7 трлн за рік, Сбербанк чекає 4,2 трлн. <b>Набіг не припинився&nbsp;— він уповільнився</b>, і це прибирає найшвидший з російських фіскальних маршрутів.</dd>
+      </div>
+      <div class="change ru">
+        <dt>Зупинено НОРСІ та «НОВАТЕК Усть-Луга»; уперше вражено Сочі з моря</dt>
+        <dd>Генштаб 04.09: після ударів <b>припинили роботу «ЛУКОЙЛ-Нижегороднафтооргсинтез» (НОРСІ, Кстово) і комплекс «НОВАТЕК Усть-Луга»</b>&nbsp;— пошкоджено трубопроводи, зафіксовано розливи нафтопродуктів; «НОВАТЕК» призупинив відвантаження з Усть-Луги (Reuters). Усть-Луга б'є не по внутрішньому ринку, а по <b>експортній виручці</b>&nbsp;— це рідкісний випадок, коли удар зачіпає валютний контур, а не лише рублевий. Тієї ж ночі вперше уражено <b>порт Сочі надводними дронами</b> (ISW): горіли нафтобаза «Роснефть-Кубаньнефтепродукт» у Сочі й нафтобаза «Лукойл» в Адлері, знищено ЗРК С-300/С-400; окремо&nbsp;— нафтохімія у Стерлітамаку. Простій потужностей у серпні досяг <b>~39% зазвичай задіяних</b>&nbsp;— рекорд; EA Analytics чекає у вересні відновлення до 4,0–4,3 млн б/д, але <b>до нормальних 5,3–5,5 млн галузь до кінця 2026 не повернеться</b>.</dd>
+      </div>
+      <div class="change ua">
+        <dt>Уперше вдарено по головній будівлі СБУ; завод Coca-Cola як мішень</dt>
+        <dd>04.09 російський дрон влучив у <b>центральну будівлю СБУ на Володимирській у Києві</b>&nbsp;— перша відома атака по головному офісу служби, ціллю був кабінет керівника Олександра Поклада (не постраждав). Обвалилися перекриття й частина зовнішньої стіни, <b>9 постраждалих, 7 госпіталізовано, двоє важкі</b>. У ніч на 04.09 дрон також уразив склади готової продукції <b>Coca-Cola Beverages Ukraine у Великій Димерці</b>&nbsp;— одного з найбільших заводів компанії в Європі; Зеленський і Сибіга кваліфікували це як умисний удар по американському бізнесу. Хронологія тут важлива: обидва удари&nbsp;— <b>напередодні приїзду американських посланців</b>. Енергетика тим часом тримається: Укренерго <b>не прогнозує відключень на 05.09</b>&nbsp;— восьма доба поспіль без графіків по країні, лишається прохання економити з 18:00 до 22:00.</dd>
+      </div>
+      <div class="change">
+        <dt>Виправлення: серпневі 424 млрд ₽ підтверджено, і механізм виявився гіршим</dt>
+        <dd>Учора я позначив місячну суму нафтогазових доходів як неперевірену. <b>Тепер вона підтверджена</b> кількома джерелами з посиланням на Мінфін РФ і Bloomberg: <b>424 млрд ₽ за серпень, −16% р/р, мінімум із січня</b>. Додалася деталь, якої я вчора не мав і яка змінює трактування: до липня це <b>−55%, або мінус 510 млрд ₽ за місяць</b>, і головна причина&nbsp;— <b>демпферні виплати НПЗ понад 197 млрд ₽ ($2,3 млрд) за один серпень</b>. Тобто паливна криза б'є по бюджету не тільки через недобір податків, а й прямим видатком: чим глибше горять НПЗ, тим більше бюджет доплачує тим, хто ще працює. Це посилює аргумент «Росія ламається фіскально», але не змінює його горизонту.</dd>
+      </div>
+      <div class="change">
+        <dt>Що не зрушило: фронт, рубль, наказ МО, паливне нормування, Левада</dt>
+        <dd><b>Фронт.</b> За добу 04.09&nbsp;— <b>236 боїв</b>. Слов'янський напрямок: <b>шість штурмів</b> (Озерне, Рай-Олександрівка, Крива Лука); ряд 8 → 2 → 5 → 7 → 6 і далі коливається без тренду, підтвердженого просування немає. Куп'янський&nbsp;— 11 спроб, Лиманський&nbsp;— 9; ISW фіксує <b>просування ЗСУ</b> на Куп'янському, Новопавлівському й Олександрівському напрямках. <b>Рубль</b>&nbsp;— 86,59 ₽/$ на 05.09 проти 86,88: зміцнення, від порога 92 віддаляємось. <b>Наказ МО РФ</b> про доступ військкоматів до банківських і податкових даних досі не підписано. <b>Паливо</b>&nbsp;— нічого нового: ліміти мереж, адміністративний розподіл лише в Криму й Севастополі. <b>Соціологія</b>&nbsp;— вторинні тексти приписують «Леваді» рекордні 66% за переговори «у вересні»; прямий пошук дає 66% за грудень 2025 і 67% за березень 2026, свіжої вересневої хвилі я <b>не знайшов</b>, тому індикатор лишаю без змін.</dd>
+      </div>
+      <div class="change">
+        <dt>Прогноз</dt>
+        <dd><b>Зсув: 39 → 36 по Росії, 30 → 33 по заморозці. Україна 26, затяжна 5.</b> Рухаю тому, що за одну добу спрацювали <b>два з дванадцяти оголошених порогів</b>, і обидва в один бік. Дипломатичний канал підтвердив повторюваність (Ратклифф 25.08 → Віткофф і Кушнер у Путіна 05.09), а серпневі дані показали, що банківський набіг&nbsp;— одна з трьох підстав мого зсуву 25 серпня&nbsp;— уповільнився на третину. Обидві зміни працюють на сценарій, у якому війна закінчується домовленістю раніше, ніж російська фіскальна конструкція дійде до межі. Чому лише три пункти, а не більше: удари 04.09 (два великі НПЗ зупинено, Сочі вражено вперше, 39% потужностей простоює, демпфер з'їдає 197 млрд ₽ на місяць) тиснуть на Росію не менше, ніж торік, а Bloomberg прямо пише, що <b>вимоги Кремля жорсткішають</b>&nbsp;— живий канал і угода це різні речі. Горизонт російського зламу лишаю Q4 2026 – Q3 2027.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="watch">
+    <h2>Що перевірити далі</h2>
+    <div class="watch">
+      <div class="wrow">
+        <span class="wdate">18–20 вересня</span>
+        <span class="wbody">Вибори до Держдуми РФ&nbsp;— перші за час повномасштабної війни й перші в умовах явного економічного спаду.
+          <span class="wthresh">Тригер: <b>мобілізація в жовтні</b> = мій прогноз підтверджується.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">початок жовтня</span>
+        <span class="wbody">Вересневий приріст готівки в обігу. Серпень дав 434 млрд ₽ проти 618,4 млрд у липні&nbsp;— уповільнення на третину. Питання, чи це разовий місяць, чи розворот.
+          <span class="wthresh">Поріг: <b>два місяці поспіль нижче 450 млрд ₽</b> = набіг вичерпується, зсуваю горизонт по РФ вправо. Повернення <b>вище 618 млрд ₽</b> = серпень був паузою.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">до 15 вересня</span>
+        <span class="wbody">Курс рубля. Друга сесія поспіль на зміцнення&nbsp;— 86,59 ₽/$ на 05.09. Від порога віддаляємось. Поточне значення див. в індикаторах.
+          <span class="wthresh">Поріг: <b>стабільно вище 92 ₽/$ два тижні поспіль</b> = валютний контур включився, зсуваю сценарій по РФ вгору. Один-два дні не рахуються.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">вересень</span>
+        <span class="wbody">Наступні аукціони ОФЗ. Трильйон 02.09 узято флоатером із дисконтом 7,5%&nbsp;— дороге фінансування. Питання, чи здатен Мінфін продавати папір із <i>фіксованим</i> купоном, який не перекладає процентний ризик на бюджет.
+          <span class="wthresh">Поріг: розміщення <b>ОФЗ-ПД на 200+ млрд ₽ за один аукціон до 30.09</b> = борговий контур працює нормально, зсуваю горизонт по РФ вправо. Нові флоатери не рахуються.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">вересень</span>
+        <span class="wbody">Паливне нормування. Питання в тому, чи стане воно адміністративною системою замість заходу окремих мереж. «Роснефть» і «Татнефть» увели ліміти на всіх своїх АЗС у країні, але прямий розподіл владою досі лише в Криму й Севастополі.
+          <span class="wthresh">Поріг: <b>офіційне нормування рішенням влади в 10+ регіонах або в Москві</b> = визнання дефіциту державою, піднімаю сценарій по РФ.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">до 1 жовтня</span>
+        <span class="wbody">Проєкт <b>відомчого наказу</b> Мінборони РФ (не законопроєкту&nbsp;— парламент тут не потрібен) про доступ військкоматів до банківських, податкових і медичних даних призовників та їхніх родичів. Експертиза завершилася 01.09, підпису й публікації немає. ISW бачить тут підготовку інфраструктури для швидкого призову резервістів після виборів.
+          <span class="wthresh">Поріг: <b>підписання й публікація наказу до 1 жовтня</b> = технічна готовність до призову є, піднімаю сценарій по РФ. Публікація проєкту сама по собі не рахується.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">жовтень</span>
+        <span class="wbody">Вікно для рішення про мобілізацію відкривається після виборів. Розвідка України називає перші дні жовтня й 300–500 тис.; правозахисники фіксують сплеск примусової вербовки вже з середини серпня; ISW (28.08) пише про підготовку до примусового призову резерву після 20.09, а проєкт наказу МО дає військкоматам повне досьє на резервістів без походу в парламент.
+          <span class="wthresh">Оголошена мобілізація&nbsp;— сигнал <b>слабкості</b>, а не сили.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">вже триває</span>
+        <span class="wbody">Зимова енергокампанія РФ стартувала в серпні, на два місяці раніше, ніж я закладав, і 03.09 змінила ціль на власний видобуток Укрнафти. Попри це графіків обмежень по країні Укренерго не запроваджує з 29.08 по 05.09 включно&nbsp;— восьма доба.
+          <span class="wthresh">Поріг: <b>відключення понад 8 годин на добу до 1 листопада</b> = піднімаю сценарій «Україна поступається першою».</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">постійно</span>
+        <span class="wbody">Слов'янський напрямок. Річку вже перейдено; перед фронтальним ударом росіянам потрібні Рай-Олександрівка й Миколаївка&nbsp;— перша з 04.09 уже фігурує в переліку штурмів. Динаміка&nbsp;— в індикаторах.
+          <span class="wthresh">Поріг: <b>бої в межах 10 км від Слов'янська</b> = український кадровий поріг близький. Накопичення сил само по собі не рахується.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">вересень–жовтень</span>
+        <span class="wbody">Премія за ризик Ормузької протоки. Brent тримається трохи вище $95 третю сесію (04.09&nbsp;— $95,23), пік $99,38 був 03.09. Це <b>єдиний фактор на користь Росії</b>&nbsp;— але серпневі бюджетні дані показали, що премія до бюджету РФ поки не доходить.
+          <span class="wthresh">Поріг: <b>Brent стабільно вище $95 понад місяць</b> разом із <b>ціною Urals FOB вище $75</b> = зсуваю прогноз по РФ вправо. Стрибки на новинах не рахуються.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">будь-коли</span>
+        <span class="wbody">Згода РФ на повітряне перемир'я. У Білому домі вважають це можливим.
+          <span class="wthresh">Це було б <b>найсильнішим сигналом російської слабкості</b> за всю кампанію ударів.</span></span>
+      </div>
+      <div class="wrow">
+        <span class="wdate">6–20 вересня</span>
+        <span class="wbody">Результат поїздки Віткоффа й Кушнера: Кремль 05.09, Київ 06.09. Поріг «канал живий» уже пройдено, тепер важить лише вихід. Очікування сторін низькі, вимоги Москви жорсткішають.
+          <span class="wthresh">Поріг: <b>оголошена наступна зустріч або будь-яке часткове перемир'я до 20.09</b> = ще піднімаю заморозку. Публічний зрив без нової дати = повертаю три пункти назад.</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="indicators">
+    <h2>Індикатори</h2>
+    <div class="legend">
+      <span><i style="background:var(--ru)"></i> тисне на Росію</span>
+      <span><i style="background:var(--ua)"></i> тисне на Україну</span>
+      <span><i style="background:var(--flat)"></i> нейтрально або двозначно</span>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Фронт</h3></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Темп просування РФ<span class="ind-note">площа, зайнята або консолідована за місяць, за геолокаціями ISW; з інфільтраціями 123,53 км². Для порівняння: ЗСУ за серпень звільнили ≥129,81 км²</span></span>
+        <span class="ind-val">90,35 км²<small>серпень, ~18% темпу 2025</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Олександрівська контрнаступальна операція<span class="ind-note">26 населених пунктів; ISW підтверджує 627 км²</span></span>
+        <span class="ind-val">745 км²<small>29.01 – 12.08</small></span>
+        <span class="ind-when">12.08</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Новий напрямок: схід Слов'янська<span class="ind-note">штурмів за добу на схід від міста, за зведеннями Генштабу й ISW. Річку вже перейдено (Закітне); Миколаївка й Рай-Олександрівка&nbsp;— тактичні передумови фронтального удару. Підтвердженого просування немає</span></span>
+        <span class="ind-val">6 штурмів<small>було 7 (03.09), 5 (02.09)</small></span>
+        <span class="ind-when">04.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Покровськ і Костянтинівка<span class="ind-note">частка Костянтинівки під контролем РФ за геолокаціями ISW; 01.09 підтверджено просування на північному заході міста. У Покровську просування ISW не підтверджує. 04.09&nbsp;— 236 боїв на фронті; ISW фіксує просування ЗСУ на Куп'янському, Новопавлівському й Олександрівському напрямках</span></span>
+        <span class="ind-val">72,23%<small>Костянтинівка, місто не взято</small></span>
+        <span class="ind-when">04.09</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Удари вглиб Росії</h3></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Простій нафтопереробних потужностей<span class="ind-note">частка зазвичай задіяних потужностей, що не працювали в серпні&nbsp;— рекорд; у липні за іншою методикою було 42,7% виведених з ладу</span></span>
+        <span class="ind-val">~39%<small>серпень, рекорд</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Переробка нафти<span class="ind-note">проти 5,3–5,5 млн у попередні літа; липень 3,6 млн (Kpler)&nbsp;— мінімум з 2002 року. Оцінки провайдерів різняться на 0,2–0,4 млн, порівнювати можна лише в межах одного джерела</span></span>
+        <span class="ind-val">~3,8 млн б/д<small>серпень, EA Analytics</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Дефіцит бензину на внутрішньому ринку<span class="ind-note">виробництво 75–80 тис. т/добу проти попиту 115–120 тис.; за перші три тижні серпня виробництво бензину й постачання на внутрішній ринок впали на 20% р/р (Bloomberg)</span></span>
+        <span class="ind-val">~35%<small>постачання −20% р/р</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Атак по НПЗ у серпні<span class="ind-note">рекорд за місяць (Bloomberg). Серед уражених&nbsp;— НОРСІ (Кстово) і «Кірішінефтеоргсинтез», другий за потужністю НПЗ РФ (~20 млн т/рік, єдиний на північному заході)</span></span>
+        <span class="ind-val">21 атака<small>11+ заводів</small></span>
+        <span class="ind-when">01–30.08</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">НПЗ, що повністю зупинили роботу з 1 серпня<span class="ind-note">Пермнафтооргсинтез, Орськнафтооргсинтез, Запсибнафтохім, Саратовський, Волгоградський; 04.09 додалися НОРСІ (Кстово) і комплекс «НОВАТЕК Усть-Луга», звідки призупинено відвантаження на експорт</span></span>
+        <span class="ind-val">7</span>
+        <span class="ind-when">04.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Ударів по промислових об'єктах РФ<span class="ind-note">з початку 2026; 04.09 уперше вражено порт Сочі надводними дронами&nbsp;— нафтобази в Сочі й Адлері, знищено ЗРК С-300/С-400</span></span>
+        <span class="ind-val">70+</span>
+        <span class="ind-when">04.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Заборона експорту бензину<span class="ind-note">для виробників заборону на дизель продовжено до 30.09.2026 замість запланованого зняття з 01.09</span></span>
+        <span class="ind-val">до 31.01.2027</span>
+        <span class="ind-when">31.08</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Нормування бензину на АЗС<span class="ind-note">регіонів з обмеженнями продажу; «Роснефть» і «Татнефть» увели ліміт 30 л/авто на всіх своїх АЗС у країні. Рішення мереж, не влади&nbsp;— виняток Крим і Севастополь, де паливо продають за талонами</span></span>
+        <span class="ind-val">58 з 89<small>+ ліміти двох мереж по всій РФ</small></span>
+        <span class="ind-when">03.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Дозвіл на бензин Євро-2, Євро-3, Євро-4<span class="ind-note">постанова уряду РФ, «тимчасовий антикризовий захід» Міненерго; відкат стандарту на два покоління назад</span></span>
+        <span class="ind-val">до 01.07.2027</span>
+        <span class="ind-when">05.08</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Рітейл і логістика РФ</h3></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Wildberries: складів знищено<span class="ind-note">з 5,2 млн м² загальної площі; 26.08 повністю вигорів центр у Котовську&nbsp;— ~100 тис. м²</span></span>
+        <span class="ind-val">~25%</span>
+        <span class="ind-when">26.08</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Збитки бізнесу від ударів по Wildberries<span class="ind-note">оцінка OSW за кампанію 18.07–18.08: 32 влучання у 19 регіонах, згоріло 740–780 тис. м². Максимальні оцінки з продавцями&nbsp;— до $12 млрд</span></span>
+        <span class="ind-val">$2,8–3,5 млрд</span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Ozon: акції після ударів<span class="ind-note">удари 22, 23, 24 серпня; пошкоджено понад 200 тис. м² складів. 29.08 уражено ще один логістичний об'єкт Ozon у Ростовській області&nbsp;— компанія підтвердила</span></span>
+        <span class="ind-val">−30%</span>
+        <span class="ind-when">29.08</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Бюджет і борг РФ</h3></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Дефіцит бюджету, січень–липень<span class="ind-note">річний план&nbsp;— 3,786 трлн ₽, перевищено в 1,7 раза</span></span>
+        <span class="ind-val">6,455 трлн ₽</span>
+        <span class="ind-when">07.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Нафтогазові доходи, січень–серпень<span class="ind-note">дані Мінфіну РФ; серпень окремо&nbsp;— 424 млрд ₽, −16% р/р і −55% до липня, з них демпферні виплати НПЗ понад 197 млрд ₽ за місяць. Прогноз на рік 8,2 трлн ₽&nbsp;— на 700 млрд нижче плану</span></span>
+        <span class="ind-val">5,02 трлн ₽<small>−16,7% р/р</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Надходження бюджету від видобутку нафти<span class="ind-note">чисті надходження за місяць за розрахунком Bloomberg; мінімум з лютого попри Brent $91–99 у серпні</span></span>
+        <span class="ind-val">326,2 млрд ₽<small>серпень, −22% р/р</small></span>
+        <span class="ind-when">03.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Аукціони ОФЗ<span class="ind-note">розміщено за номіналом на аукціоні 02.09 (флоатер ПК-29031, погашення 2042) при попиті 1,4247 трлн ₽; ціна відсічення 92,5% проти 94% по зіставному 29029 напередодні. План запозичень до кінця року&nbsp;— 6 трлн ₽</span></span>
+        <span class="ind-val">1 трлн ₽<small>дисконт 7,5%, покупець&nbsp;— банки</small></span>
+        <span class="ind-when">02.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Дохідність, яку вимагає ринок<span class="ind-note">вище ключової ставки&nbsp;— ринок не вірить ЦБ</span></span>
+        <span class="ind-val">16,5–16,75%</span>
+        <span class="ind-when">07.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">ФНБ, ліквідна частина<span class="ind-note">1,6% ВВП; на 1 лютого було $55,8 млрд</span></span>
+        <span class="ind-val">$46,2 млрд</span>
+        <span class="ind-when">01.08</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Банківська система РФ</h3></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Прогноз ЦБ РФ по відтоку готівки<span class="ind-note">базовий сценарій ЦБ: +3,7 трлн ₽ готівки в обігу за 2026 (2,1 трлн уже за січень–липень), +3,6 трлн за 2027, +5,2 трлн за 2028. Набіг став для регулятора плановою величиною, а не надзвичайною подією</span></span>
+        <span class="ind-val">+5,2 трлн ₽<small>до кінця 2028</small></span>
+        <span class="ind-when">31.08</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Готівка проти вкладів в опитуванні ФОМ для ЦБ<span class="ind-note">серпень: 37% вважають готівку найкращою формою заощаджень (+4 п.п. за місяць, максимум з жовтня 2022), вклади й рахунки&nbsp;— 36% (мінімум з грудня 2022). Уперше за майже чотири роки готівка обійшла банк. Це поведінкова норма, а не банківська криза&nbsp;— але криза виростає саме з неї</span></span>
+        <span class="ind-val">37% / 36%<small>перетин</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Відтік готівки з банків<span class="ind-note">визнання фіндиректора Сбербанку</span></span>
+        <span class="ind-val">~2 трлн ₽<small>$25,2 млрд з початку року</small></span>
+        <span class="ind-when">07.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Приріст готівки в обігу за місяць<span class="ind-note">дані ЦБ РФ через «Интерфакс»; липень 618,4 млрд ₽, з початку року +2,5 трлн. Не плутати зі зняттям коштів&nbsp;— це інша метрика й інший ряд</span></span>
+        <span class="ind-val">434 млрд ₽<small>серпень, −⅓ до липня</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Банки з відтоком строкових вкладів<span class="ind-note">травень 134 → червень 138 → липень 152; лідер&nbsp;— Газпромбанк: −299,5 млрд ₽ за 4 місяці, 10,77% вкладів фізосіб</span></span>
+        <span class="ind-val">152 з 265<small>більше половини сектору</small></span>
+        <span class="ind-when">07.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Проблемні корпоративні кредити, увесь сектор<span class="ind-note">дані ЦБ РФ; 11,5% у березні → 11,6% у травні; покриття резервами й заставою ~50%, непокритий ризик 5,5 трлн ₽</span></span>
+        <span class="ind-val">11,7%<small>11,3 трлн ₽</small></span>
+        <span class="ind-when">01.06</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Макроекономіка РФ</h3></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Ключова ставка ЦБ<span class="ind-note">знижується&nbsp;— це ще не монетарна криза</span></span>
+        <span class="ind-val">14,00%<small>було 14,25%</small></span>
+        <span class="ind-when">24.07</span></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Інфляція<span class="ind-note">прогноз ЦБ на рік підвищено до 6–7% через паливо</span></span>
+        <span class="ind-val">5,9%</span>
+        <span class="ind-when">20.07</span></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Курс рубля<span class="ind-note">офіційний курс ЦБ РФ; друга сесія поспіль на зміцнення. Сайт cbr.ru заблоковано проксі середовища, курс беру з вторинних джерел</span></span>
+        <span class="ind-val">86,59 ₽/$<small>було 86,88</small></span>
+        <span class="ind-when">05.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Прогноз ВВП на 2026 від ЦБ РФ<span class="ind-note">Q1 офіційно показав скорочення</span></span>
+        <span class="ind-val">0,0–1,0%</span>
+        <span class="ind-when">25.07</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Інвестиції в основний капітал, Q1</span>
+        <span class="ind-val">−14,3%<small>р/р</small></span>
+        <span class="ind-when">Q1 2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Оборонні витрати 2026<span class="ind-note">−4,4% номінально до 2025, ~−10% реально</span></span>
+        <span class="ind-val">12,9 трлн ₽</span>
+        <span class="ind-when">бюджет</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Нафта і експорт</h3></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Brent<span class="ind-note">ціна закриття; пік $99,38 був 03.09 на ударі США по іранських танкерах. Тримається трохи вище $95 третю сесію&nbsp;— єдиний фактор на користь РФ</span></span>
+        <span class="ind-val">$95,23<small>було ~$95,5</small></span>
+        <span class="ind-when">04.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Urals<span class="ind-note">ціна FOB у російських портах, з якої рахується бюджет: дисконт до Brent ~$28–30&nbsp;— дорога нафта до Росії не доходить. Заголовки про «дисконт $2–3» стосуються цін CIF з доставкою в Індію й Китай, куди вже вкладено фрахт тіньового флоту; це інша база, і вона не спростовує першу</span></span>
+        <span class="ind-val">$60,22<small>середнє за липень</small></span>
+        <span class="ind-when">07.2026</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Експорт сирої нафти<span class="ind-note">зростає попри санкції&nbsp;— валютної кризи у РФ немає</span></span>
+        <span class="ind-val">3,4 млн б/д<small>було 3,3</small></span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Експорт нафтопродуктів<span class="ind-note">рекордний мінімум за всю історію спостережень</span></span>
+        <span class="ind-val">4,7 млн т<small>−23% м/м</small></span>
+        <span class="ind-when">07.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Доходи від морського експорту нафтопродуктів</span>
+        <span class="ind-val">−45%<small>м/м, €116 млн/добу</small></span>
+        <span class="ind-when">07.2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Загальні експортні доходи від викопного палива</span>
+        <span class="ind-val">€683 млн/д<small>−12% м/м</small></span>
+        <span class="ind-when">07.2026</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Кадри</h3></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Нові контракти в армію РФ, Q1<span class="ind-note">трирічний мінімум; недобір ~30 тис. від плану</span></span>
+        <span class="ind-val">71 216</span>
+        <span class="ind-when">Q1 2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Виплата за підписання контракту<span class="ind-note">плюс списання боргів до 10 млн ₽</span></span>
+        <span class="ind-val">до 5,5 млн ₽</span>
+        <span class="ind-when">2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Регіональні витрати на вербувальників<span class="ind-note">за місяць</span></span>
+        <span class="ind-val">802 млн ₽<small>було 358 млн</small></span>
+        <span class="ind-when">2026</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Підготовка до мобілізації РФ<span class="ind-note">три лінії доказів: розвідка України (300–500 тис. на початок жовтня), західна розвідка (навчання в регіонах) і проєкт відомчого наказу МО про доступ військкоматів до банківських, податкових і медичних даних призовників. Це наказ, а не закон&nbsp;— Держдума в процедурі не бере участі</span></span>
+        <span class="ind-val">триває<small>наказ не підписано</small></span>
+        <span class="ind-when">05.09</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Набір до ЗСУ<span class="ind-note">проти ~30 тис./міс у РФ</span></span>
+        <span class="ind-val">17–24 тис./міс</span>
+        <span class="ind-when">2026</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Укомплектованість бригад ЗСУ<span class="ind-note">за оцінками військових, на лінії&nbsp;— 20–30%</span></span>
+        <span class="ind-val">40–60%</span>
+        <span class="ind-when">2026</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Втрати України з лютого 2022<span class="ind-note">оцінка CSIS; з них 125–150 тис. безповоротних</span></span>
+        <span class="ind-val">525–625 тис.</span>
+        <span class="ind-when">06.2026</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Український тил</h3></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Втрачено довоєнної генерації<span class="ind-note">дефіцит потужності 6,3 ГВт на початок року</span></span>
+        <span class="ind-val">~70%</span>
+        <span class="ind-when">2026</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Знеструмлення після ударів по енергетиці<span class="ind-note">локальні знеструмлення після ударів тримались у чотирьох областях на ранок 04.09. Графіків обмежень по країні Укренерго не запроваджує з 29.08&nbsp;— восьма доба; лишається прохання економити з 18:00 до 22:00</span></span>
+        <span class="ind-val">без графіків<small>8-ма доба поспіль</small></span>
+        <span class="ind-when">05.09</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Удари по видобутку Укрнафти<span class="ind-note">виробничих об'єктів пошкоджено за одну ніч; за оцінкою Нафтогазу один із найбільших ударів по видобутку за останні місяці, втрачено значні обсяги нафти й газу</span></span>
+        <span class="ind-val">7 об'єктів<small>постраждалих немає</small></span>
+        <span class="ind-when">03.09</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Виробництво балістичних і гіперзвукових ракет РФ<span class="ind-note">накопичуються для зимової кампанії; 56 випущено за перший тиждень серпня</span></span>
+        <span class="ind-val">&gt;100/міс</span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Перехоплювачі до Patriot<span class="ind-note">Зеленський: маємо ~1% від потреби; 5% запасу США дали б пройти зиму</span></span>
+        <span class="ind-val">−2,5 раза<small>до рівня 2025</small></span>
+        <span class="ind-when">13.08</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Удари по ТЕС ДТЕК<span class="ind-note">18.08 генерацію зупинено повністю; зимова кампанія РФ стартувала в серпні, не восени</span></span>
+        <span class="ind-val">230+</span>
+        <span class="ind-when">18.08</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Удари РФ по містах і тилу<span class="ind-note">04.09 уперше вражено головну будівлю СБУ на Володимирській, ціль&nbsp;— кабінет голови служби; тієї ж ночі уражено склади заводу Coca-Cola у Великій Димерці. Раніше під ударом були «Нова пошта», «Епіцентр», Roshen, Comfy, «Аврора»</span></span>
+        <span class="ind-val">9 постраждалих<small>СБУ, 7 госпіталізовано</small></span>
+        <span class="ind-when">04.09</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Детонація складу боєприпасів у Милій<span class="ind-note">склад Сил оборони серед житлових будинків Бучанського району; 34 з загиблих&nbsp;— мешканці пансіонату для літніх. Міноборони оголосило повний аудит місць зберігання боєприпасів</span></span>
+        <span class="ind-val">37–38 загиблих<small>15 поранених</small></span>
+        <span class="ind-when">29.08</span></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Кредит ЄС на 2026–2027<span class="ind-note">потреба за оцінкою МВФ&nbsp;— €137 млрд; заморожені активи не задіяні</span></span>
+        <span class="ind-val">$106 млрд</span>
+        <span class="ind-when">12.2025</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Дефіцит фінансування, названий Зеленським<span class="ind-note">бракує €3,5 млрд саме на енергетику; загальна потреба ~$20 млрд до кінця 2026; Київ розраховує на €30 млрд допомоги ЄС, під яку ще треба ухвалити законодавство</span></span>
+        <span class="ind-val">€3,5 млрд<small>потреба ~$20 млрд</small></span>
+        <span class="ind-when">31.08</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Політика і суспільство</h3></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Вибори до Держдуми РФ<span class="ind-note">перші за час повномасштабної війни</span></span>
+        <span class="ind-val">18–20.09.2026</span>
+        <span class="ind-when">призначено</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">Росіяни за початок переговорів<span class="ind-note">рекордний максимум; але 72,2% усе ще підтримують дії армії</span></span>
+        <span class="ind-val">67,2%</span>
+        <span class="ind-when">02.2026</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Українці за переговорне завершення<span class="ind-note">24% за продовження до перемоги&nbsp;— історичний мінімум</span></span>
+        <span class="ind-val">69%</span>
+        <span class="ind-when">2026</span></div>
+      <div class="ind ua"><i class="stripe"></i>
+        <span class="ind-label">Українці, для яких корупція&nbsp;— більша загроза за агресію</span>
+        <span class="ind-val">54%</span>
+        <span class="ind-when">04.2026</span></div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Дипломатія і санкції</h3></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Пропозиція 23 серпня<span class="ind-note">перемир'я, взаємне відведення військ, буферна зона, гарантії ЄС і НАТО&nbsp;— Кремль відхилив</span></span>
+        <span class="ind-val">відхилено</span>
+        <span class="ind-when">23.08</span></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Повітряне перемир'я<span class="ind-note">США вважають, що Кремль може погодитись через удари вглиб</span></span>
+        <span class="ind-val">обговорюється</span>
+        <span class="ind-when">08.2026</span></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Візит директора ЦРУ до Москви<span class="ind-note">з Путіним не зустрічався; Пєсков&nbsp;— «контакти спецслужб», вплив на відносини оцінювати передчасно</span></span>
+        <span class="ind-val">відбувся</span>
+        <span class="ind-when">26.08</span></div>
+      <div class="ind"><i class="stripe"></i>
+        <span class="ind-label">Візит Віткоффа й Кушнера<span class="ind-note">зустріч із Путіним у Кремлі 05.09 (з російського боку Ушаков), 06.09&nbsp;— Зеленський у Києві. Bloomberg: очікування «вкрай низькі», вимоги Москви жорсткішають. Другий американський візит за 10 днів після Ратклиффа</span></span>
+        <span class="ind-val">05–06.09<small>Москва, потім Київ</small></span>
+        <span class="ind-when">05.09</span></div>
+      <div class="ind ru"><i class="stripe"></i>
+        <span class="ind-label">21-й пакет санкцій ЄС<span class="ind-note">33 банки під забороною транзакцій з 13 серпня</span></span>
+        <span class="ind-val">чинний</span>
+        <span class="ind-when">24.07</span></div>
+    </div>
+  </section>
+
+  <section id="systemic">
+    <h2>Системні сигнали</h2>
+    <div class="flag">
+      <h3>Страйк капіталу</h3>
+      <p>Указом від 24 серпня держава може перебирати управління інфраструктурою, власники якої не захищають або не відновлюють її. Формально&nbsp;— не націоналізація. Фактично&nbsp;— визнання того, що <b>власники НПЗ, уражених по три-п'ять разів, більше не бачать сенсу вкладати гроші в ремонт</b>.</p>
+    </div>
+    <div class="flag">
+      <h3>Експортер палива імпортує паливо</h3>
+      <p>Один із найбільших нафтоекспортерів світу купує бензин у Білорусі, Казахстану та Індії (68 тис. т у порт Вітіно), готує закупівлі в Китаю, Південної Кореї та Сінгапуру. Білоруські поставки при цьому впали з рекордних 212 тис. т у липні до <b>21 тис. т за першу половину серпня</b>&nbsp;— сусіди не закривають діру.</p>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2>Історія прогнозу</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Сценарій</th>
+            <th scope="col">20.08</th>
+            <th scope="col">25.08</th>
+            <th scope="col">03.09</th>
+            <th scope="col">05.09</th>
+            <th scope="col">Δ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Росія поступається першою</td><td>35%</td><td>42%</td><td>39%</td><td>36%</td><td class="down">▼ −3</td></tr>
+          <tr><td>Обидві виснажені → заморозка</td><td>30%</td><td>28%</td><td>30%</td><td>33%</td><td class="up">▲ +3</td></tr>
+          <tr><td>Україна поступається першою</td><td>30%</td><td>25%</td><td>26%</td><td>26%</td><td class="same">— 0</td></tr>
+          <tr><td>Затяжна війна далі 2028</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td class="same">— 0</td></tr>
+          <tr><td>Горизонт російського зламу</td><td>Q2 27 – Q1 28</td><td>Q4 26 – Q3 27</td><td>Q4 26 – Q3 27</td><td>Q4 26 – Q3 27</td><td class="same">— 0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Зсув 25 серпня зумовлений трьома речами: банківський набіг у РФ виявився швидшою динамікою за бюджетну; указ про інфраструктуру показав страйк капіталу; український контрнаступ на Олександрівському напрямку виявився результативнішим, ніж я оцінював. Стримувальний фактор проти більшого зсуву&nbsp;— експорт сирої нафти РФ зростає, тож валютної кризи немає. Зсув 3 вересня має одну причину: аукціон ОФЗ на 1 трлн ₽ прибрав найшвидший маршрут російського фіскального зламу щонайменше на квартал. Зсув малий і горизонт не рухаю, бо ціна цих грошей&nbsp;— дисконт 7,5% і шістнадцятирічний флоатер: борговий контур працює, але дорого. Зсув 5 вересня зумовлений двома порогами, що спрацювали за одну добу: американський канал підтвердив повторюваність (Віткофф і Кушнер у Путіна через 10 днів після Ратклиффа), а серпневий приріст готівки в обігу впав на третину до липня&nbsp;— банківський набіг, одна з трьох підстав зсуву 25 серпня, уповільнився. Обидва працюють на заморозку, а не на злам, тому три пункти йдуть від Росії до неї. Стримувальний фактор проти більшого зсуву&nbsp;— рекордний простій нафтопереробки, зупинка НОРСІ й Усть-Луги та демпфер, що з'їдає 197 млрд ₽ на місяць: фізичний тиск на РФ не слабшає.</p>
+  </section>
+
+  <section id="trend">
+    <h2>Динаміка прогнозу</h2>
+    <p>Кожна лінія&nbsp;— один сценарій. Точка ставиться в день оновлення трекера. Горизонтальна ділянка означає, що нових підстав рухати оцінку не з'явилось&nbsp;— це теж інформація. Наведіть курсор на графік, щоб побачити всі чотири значення на конкретну дату.</p>
+    <div class="legend" id="trend-legend"></div>
+    <div class="scroll chart-scroll" id="trend-wrap">
+      <svg id="trend-chart" role="img" aria-label="Графік зміни ймовірностей чотирьох сценаріїв у часі. Точні значення наведено в таблиці «Історія прогнозу» вище."></svg>
+      <div class="chart-tip" id="trend-tip" hidden></div>
+    </div>
+    <script type="application/json" id="trend-data">
+{"dates":["20.08","25.08","26.08","27.08","28.08","29.08","30.08","31.08","01.09","02.09","03.09","04.09","05.09"],"ru":[35,42,42,42,42,42,42,42,42,42,39,39,36],"both":[30,28,28,28,28,28,28,28,28,28,30,30,33],"ua":[30,25,25,25,25,25,25,25,25,25,26,26,26],"long":[5,5,5,5,5,5,5,5,5,5,5,5,5]}
+    </script>
+    <script>
+    (function () {
+      var el   = document.getElementById('trend-chart');
+      var raw  = document.getElementById('trend-data');
+      var leg  = document.getElementById('trend-legend');
+      var wrap = document.getElementById('trend-wrap');
+      var tip  = document.getElementById('trend-tip');
+      if (!el || !raw) return;
+
+      var d;
+      try { d = JSON.parse(raw.textContent); } catch (e) { return; }
+      var n = d.dates && d.dates.length;
+      if (!n) return;
+
+      /* Колір несе семантику трекера, тому кожна серія має ще й власний штрих:
+         ідентичність лінії ніколи не залежить лише від кольору. */
+      var SERIES = [
+        { k: 'ru',   c: 'var(--ru)',    name: 'Росія поступається першою',    tag: 'РФ',        dash: null },
+        { k: 'both', c: 'var(--flat)',  name: 'Обидві виснажені → заморозка', tag: 'Заморозка', dash: '8 5' },
+        { k: 'ua',   c: 'var(--ua)',    name: 'Україна поступається першою',  tag: 'Україна',   dash: null },
+        { k: 'long', c: 'var(--faint)', name: 'Затяжна війна далі 2028',      tag: 'Затяжна',   dash: '1.5 4' }
+      ];
+
+      var W = 760, H = 300, L = 42, R = 108, T = 18, B = 30;
+      var all = [];
+      SERIES.forEach(function (s) {
+        (d[s.k] || []).forEach(function (v) { if (typeof v === 'number') all.push(v); });
+      });
+      if (!all.length) return;
+      var yMax = Math.max(50, Math.ceil(Math.max.apply(null, all) / 10) * 10);
+
+      function px(i) { return n === 1 ? L + (W - L - R) / 2 : L + i * (W - L - R) / (n - 1); }
+      function py(v) { return T + (1 - v / yMax) * (H - T - B); }
+
+      var NS = 'http://www.w3.org/2000/svg';
+      function mk(tag, attrs, style) {
+        var e = document.createElementNS(NS, tag);
+        for (var k in attrs) e.setAttribute(k, attrs[k]);
+        for (var p in (style || {})) e.style[p] = style[p];
+        return e;
+      }
+
+      el.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      el.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      while (el.firstChild) el.removeChild(el.firstChild);
+
+      /* сітка та вісь Y */
+      for (var v = 0; v <= yMax; v += 10) {
+        el.appendChild(mk('line', { x1: L, y1: py(v), x2: W - R, y2: py(v), 'stroke-width': 1 },
+                          { stroke: 'var(--rule-soft)' }));
+        var yl = mk('text', { x: L - 9, y: py(v) + 4, 'text-anchor': 'end', 'font-size': 11 },
+                    { fill: 'var(--faint)' });
+        yl.textContent = v + '%';
+        el.appendChild(yl);
+      }
+
+      /* вісь X — не густіше ніж 8 підписів */
+      var step = Math.max(1, Math.ceil(n / 8));
+      for (var i = 0; i < n; i++) {
+        if (i % step !== 0 && i !== n - 1) continue;
+        var xl = mk('text', { x: px(i), y: H - 9, 'text-anchor': 'middle', 'font-size': 11 },
+                    { fill: 'var(--faint)' });
+        xl.textContent = d.dates[i];
+        el.appendChild(xl);
+      }
+
+      /* перехрестя під лініями */
+      var hair = mk('line', { x1: 0, y1: T, x2: 0, y2: H - B, 'stroke-width': 1 },
+                    { stroke: 'var(--rule)', display: 'none' });
+      el.appendChild(hair);
+
+      var dots = [];
+      var labels = [];
+
+      SERIES.forEach(function (s) {
+        var vals = d[s.k] || [];
+        if (!vals.length) return;
+
+        var pts = vals.map(function (v, i) { return px(i) + ',' + py(v); }).join(' ');
+        var attrs = { points: pts, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' };
+        if (s.dash) attrs['stroke-dasharray'] = s.dash;
+        el.appendChild(mk('polyline', attrs, { fill: 'none', stroke: s.c }));
+
+        vals.forEach(function (v, i) {
+          el.appendChild(mk('circle', { cx: px(i), cy: py(v), r: 4, 'stroke-width': 2 },
+                            { fill: s.c, stroke: 'var(--paper)' }));
+        });
+
+        var last = vals[vals.length - 1];
+        labels.push({ y: py(last), text: s.tag + ' ' + last + '%', color: s.c });
+
+        var marker = mk('circle', { cx: 0, cy: 0, r: 5, 'stroke-width': 2 },
+                        { fill: s.c, stroke: 'var(--paper)', display: 'none' });
+        el.appendChild(marker);
+        dots.push({ s: s, vals: vals, marker: marker });
+
+        if (leg) {
+          var item = document.createElement('span');
+          var sw = document.createElement('i');
+          sw.style.background = s.dash
+            ? 'repeating-linear-gradient(90deg,' + s.c + ' 0 5px,transparent 5px 9px)'
+            : s.c;
+          item.appendChild(sw);
+          item.appendChild(document.createTextNode(' ' + s.name + ' — '));
+          var lv = document.createElement('b');
+          lv.textContent = last + '%';
+          item.appendChild(lv);
+          leg.appendChild(item);
+        }
+      });
+
+      /* прямі підписи на кінцях ліній, розсунуті щоб не наїжджали */
+      labels.sort(function (a, b) { return a.y - b.y; });
+      var MIN = 18;
+      for (var j = 1; j < labels.length; j++) {
+        if (labels[j].y - labels[j - 1].y < MIN) labels[j].y = labels[j - 1].y + MIN;
+      }
+      var overflow = labels.length ? labels[labels.length - 1].y - (H - B) : 0;
+      if (overflow > 0) labels.forEach(function (l) { l.y -= overflow; });
+      labels.forEach(function (l) {
+        var t = mk('text', { x: W - R + 10, y: l.y + 4, 'font-size': 11.5, 'font-weight': 600 },
+                   { fill: l.color });
+        t.textContent = l.text;
+        el.appendChild(t);
+      });
+
+      /* наведення: перехрестя + підказка з усіма чотирма значеннями */
+      if (!wrap || !tip) return;
+
+      function hide() {
+        hair.style.display = 'none';
+        dots.forEach(function (o) { o.marker.style.display = 'none'; });
+        tip.hidden = true;
+      }
+
+      function show(ev) {
+        var r = el.getBoundingClientRect();
+        if (!r.width) return;
+        var scale = W / r.width;
+        var xv = (ev.clientX - r.left) * scale;
+        if (xv < L - 20 || xv > W - R + 20) { hide(); return; }
+
+        var i = 0, best = Infinity;
+        for (var k = 0; k < n; k++) {
+          var dist = Math.abs(px(k) - xv);
+          if (dist < best) { best = dist; i = k; }
+        }
+
+        hair.setAttribute('x1', px(i));
+        hair.setAttribute('x2', px(i));
+        hair.style.display = '';
+
+        var rows = '<span class="tip-date">' + d.dates[i] + '</span>';
+        dots.forEach(function (o) {
+          var v = o.vals[i];
+          if (typeof v !== 'number') { o.marker.style.display = 'none'; return; }
+          o.marker.setAttribute('cx', px(i));
+          o.marker.setAttribute('cy', py(v));
+          o.marker.style.display = '';
+          rows += '<div><i style="background:' + o.s.c + '"></i>' + o.s.tag + ' <b>' + v + '%</b></div>';
+        });
+        tip.innerHTML = rows;
+        tip.hidden = false;
+
+        var wr = wrap.getBoundingClientRect();
+        tip.style.left = ((r.left - wr.left) + wrap.scrollLeft + px(i) / scale) + 'px';
+      }
+
+      wrap.addEventListener('pointermove', show);
+      wrap.addEventListener('pointerdown', show);
+      wrap.addEventListener('pointerleave', hide);
+      wrap.addEventListener('scroll', hide);
+    })();
+    </script>
+  </section>
+
+  <footer>
+    <div>
+      <h3>Як читати</h3>
+      <p>Колір несе лише одне значення&nbsp;— на кого тисне показник. У цій війні горіння НПЗ «погане» для однієї сторони й «добре» для іншої, тому звичної шкали «добре/погано» тут немає навмисно.</p>
+    </div>
+    <div>
+      <h3>Головна межа моделі</h3>
+      <p>Я не можу оцінити політичну стійкість жодного з режимів. 72,2% росіян усе ще підтримують дії армії&nbsp;— це не передреволюційні цифри. Указ про інфраструктуру, банківський набіг і паливна криза виглядають як передкризові симптоми, але <b>авторитарна держава з валютною виручкою від сирої нафти може так жити довго</b>.</p>
+    </div>
+    <div>
+      <h3>Ключова різниця, яку плутають найчастіше</h3>
+      <p>У Росії <b>немає валютної кризи</b>&nbsp;— експорт сирої нафти зростає. У Росії криза <b>рублевої ліквідності й фізичних потужностей</b>. Це різні речі з різними горизонтами й різними ліками.</p>
+    </div>
+    <div>
+      <h3>Джерела</h3>
+      <div class="srcs">
+        <span>ISW / Critical Threats</span><span>OSW</span><span>CREA</span><span>KSE</span><span>IEA</span><span>CSIS</span><span>SIPRI</span><span>Bank of Finland</span>
+        <span>Reuters</span><span>Bloomberg</span><span>AP</span><span>CNBC</span><span>Al Jazeera</span><span>CNN</span><span>TIME</span><span>Euronews</span><span>Fortune</span>
+        <span>The Moscow Times</span><span>Meduza</span><span>Novaya Gazeta Europe</span><span>The Bell</span><span>Interfax</span><span>Levada</span>
+        <span>Kyiv Independent</span><span>Kyiv Post</span><span>Українська правда</span><span>СЗР України</span><span>Мінфін РФ</span><span>ЦБ РФ</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</body></html>
